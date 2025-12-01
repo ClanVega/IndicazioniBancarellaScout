@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pacchetti Regalo Natalizi – Indicazioni</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='90' font-size='90'>🎁</text></svg>">
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #7a0d0d 0%, #a50f0f 25%, #7a0d0d 50%, #5c0a0a 100%);
+            color: #fff;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .snowflake {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .christmas-decoration {
+            position: absolute;
+            z-index: 0;
+        }
+
+        .decoration-1 {
+            top: 10%;
+            left: 5%;
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle, #d32f2f, #b71c1c);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            opacity: 0.7;
+        }
+
+        .decoration-2 {
+            bottom: 15%;
+            right: 5%;
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, #2e7d32, #1b5e20);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            opacity: 0.7;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #d32f2f, #2e7d32, #ff9800);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #ffeb3b, #ff9800, #ff5722);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #ffeb3b;
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #c8e6c9;
+            font-weight: 500;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: #ffeb3b;
+        }
+
+        .box {
+            background: rgba(0, 0, 0, 0.25);
+            padding: 25px;
+            border-radius: 18px;
+            margin-top: 30px;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        .map-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+
+        iframe {
+            border: 0;
+            width: 100%;
+            height: 450px;
+            border-radius: 12px;
+            display: block;
+        }
+
+        .map-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 85%, rgba(122, 13, 13, 0.3) 100%);
+            pointer-events: none;
+            border-radius: 12px;
+        }
+
+        .indicazioni {
+            position: relative;
+        }
+
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .step:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateX(5px);
+        }
+
+        .step-number {
+            min-width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #d32f2f, #b71c1c);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .step-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: #ffcc80;
+        }
+
+        .step-content p {
+            line-height: 1.6;
+            font-size: 1.05rem;
+            color: #e0e0e0;
+        }
+
+        .info-box {
+            background: rgba(46, 125, 50, 0.2);
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .info-box p {
+            font-style: italic;
+            color: #c8e6c9;
+        }
+        
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            border-top: 2px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .footer::before {
+            content: "🎄";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            background: #7a0d0d;
+            padding: 0 15px;
+            border-radius: 45%;
+        }
+
+        .footer p {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+
+        .christmas-wish {
+            font-size: 1.1rem;
+            color: #ffeb3b;
+            font-weight: 600;
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(211, 47, 47, 0.2);
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+            h1 {
+                font-size: 2.2rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            .box {
+                padding: 20px;
+            }
+            .step {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .step-number {
+                align-self: center;
+            }
+            iframe {
+                height: 350px;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .box {
+            animation: fadeIn 0.8s ease forwards;
+        }
+        .box:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        .box:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="christmas-decoration decoration-1"></div>
+    <div class="christmas-decoration decoration-2"></div>
+
+    <div class="container">
+        <div class="header">
+            <h1>!! PACCHETTI REGALO NATALIZI !!</h1>
+            <div class="subtitle">Unisciti allo spirito del Natale con pacchetti regalo unici</div>
+            <h2>Clan Vega – Scout Torri di Q.lo</h2>
+            <div class="logo-container">
+            </div>
+        </div>
+
+        <div class="box">
+            <h2>La nostra posizione nel Centro Commerciale</h2>
+            <div class="map-container">
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2796.029167331264!2d11.6223996775293!3d45.509491471074824!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477f2e5014d597bd%3A0x533012862aa408d9!2sSoon!5e0!3m2!1sit!2sit!4v1764599699987!5m2!1sit!2sit"
+                  style="border:0;" 
+                  allowfullscreen 
+                  loading="lazy">
+                </iframe>
+                <div class="map-overlay"></div>
+            </div>
+            <p style="margin-top: 15px; text-align: center; color: #ffcc80;">
+                <strong>C.C. Le Piramidi - Via Pola, 20 - 36040 Torri di Quartesolo (VI)</strong>
+            </p>
+        </div>
+
+        <div class="box indicazioni">
+            <h2>Come raggiungerci</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 20px; text-align: center;">
+                Segui queste semplici indicazioni per trovare il nostro stand natalizio.
+            </p>
+
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Entra nel Centro Commerciale</h3>
+                        <p>Usa l'<strong>ingresso principale</strong> vicino all'OVS (quello più grande e vicino al parcheggio centrale).</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Sali al secondo piano</h3>
+                        <p>Prendi le <strong>scale mobili</strong> o l'<strong>ascensore</strong> per raggiungere il 2° piano. Segui le indicazioni per i negozi di abbigliamento.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Cerca il negozio Soon</h3>
+                        <p>Una volta al secondo piano, dirigiti verso il negozio chiamato: <strong>Soon</strong>.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Trova il nostro stand</h3>
+                        <p>Il nostro stand è <strong>proprio davanti a Soon</strong>, nel corridoio principale. Ci troverai con dei tavoli e un cartellone ben visibile.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <p>✨ <strong>Consiglio:</strong> Se arrivi da un altro ingresso, cerca sempre le indicazioni , per arrivare al centro delle piramidi, quindi sali al 2° piano. Una volta lì, il nostro stand sarà facile da individuare!</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© Clan Vega – Scout Torri di Quartesolo</p>
+            <p> Aperti 8-13-14-20-21-22-23-24 dicembre | Orari: 9:00 - 19:30</p>
+            <div class="christmas-wish">
+                🎄 Ti aspettiamo per rendere il tuo Natale più speciale e colorato! 🎅
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function createSnowflakes() {
+            const snowflakesContainer = document.createElement('div');
+            snowflakesContainer.id = 'snowflakes-container';
+            document.body.appendChild(snowflakesContainer);
+
+            for (let i = 0; i < 50; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.classList.add('snowflake');
+                const size = Math.random() * 6 + 3;
+                snowflake.style.width = `${size}px`;
+                snowflake.style.height = `${size}px`;
+                snowflake.style.left = `${Math.random() * 100}%`;
+                snowflake.style.top = `${Math.random() * 100}%`;
+                snowflake.style.opacity = Math.random() * 0.6 + 0.3;
+                const animationDuration = Math.random() * 10 + 10;
+                snowflake.style.animation = `fall ${animationDuration}s linear infinite`;
+                snowflake.style.animationDelay = `${Math.random() * 5}s`;
+                
+                snowflakesContainer.appendChild(snowflake);
+            }
+        }
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = `
+            @keyframes fall {
+                0% {
+                    transform: translateY(-100px) rotate(0deg);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(100vh) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+            
+            .snowflake {
+                position: fixed;
+                background-color: white;
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 1;
+            }
+        `;
+        document.head.appendChild(styleSheet);
+        document.addEventListener('DOMContentLoaded', createSnowflakes);
+        function twinkleEffect() {
+            const titles = document.querySelectorAll('h1, h2, .christmas-wish');
+            titles.forEach(title => {
+                title.style.animation = `twinkle 3s infinite alternate`;
+            });
+        }
+        const twinkleStyle = document.createElement('style');
+        twinkleStyle.textContent = `
+            @keyframes twinkle {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.8; }
+            }
+        `;
+        document.head.appendChild(twinkleStyle);
+        document.addEventListener('DOMContentLoaded', twinkleEffect);
+    </script>
+</body>
+
+</html>
